@@ -29,7 +29,7 @@ jobs:
       uses: actions/checkout@v2 #copies code from the repo into this hosted run 
       
     - name: pull dockerfile 
-      uses: Docker/DockerConf.dockerfile@v1
+      uses: Pipe/DockerConf.dockerfile@v1
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1

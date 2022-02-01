@@ -1,10 +1,13 @@
 # This workflow will build and push a new container image to Amazon ECR,
 # and then will deploy a new task definition to Amazon ECS, when there is a push to the main branch.
-#
+
+
 name: Deploy to Amazon ECS
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - TestBranch
 
 env:
   AWS_REGION: us-east-1                   
@@ -19,7 +22,6 @@ jobs:
     name: Build and Package Artifact
     runs-on: ubuntu-20.04
     container: "python:3.9.0"
-    environment: production
 
     steps:
     - name: Checkout

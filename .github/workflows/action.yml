@@ -11,7 +11,7 @@ on:
 
 env:
   AWS_REGION: us-east-1                   
-  ECR_REPOSITORY: big_project_repo           
+  ECR_REPOSITORY: ${{ secrets.ECR_REPO }}           
   ECS_SERVICE: AnimeList_task_definition                
   ECS_CLUSTER: webscraper                 
   ECS_TASK_DEFINITION: BSoup                                   
@@ -43,7 +43,7 @@ jobs:
   # uses: aws-actions/amazon-ecr-login@aaf69d68aa3fb14c1d5a6be9ac61fe15b48453a2
       uses: aws-actions/amazon-ecr-login@v1
       with:
-        registries: big_project_repo
+        registries: ${{ secrets.ECR_REPO }}
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image

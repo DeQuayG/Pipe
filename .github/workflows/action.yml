@@ -52,9 +52,9 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: latest  ## Modified the image tag to fit what the ECS Service is aready pointing to
       run: |
-        docker build . --file Dockerfile --tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        docker build . --file Dockerfile --tag ${{ secrets.ECR_REPO }} .
+        docker push ${{ secrets.ECR_REPO }}
+        echo "::set-output name=image::${{ secrets.ECR_REPO }}"
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def

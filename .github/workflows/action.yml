@@ -7,17 +7,7 @@ name: Deploy to Amazon ECS
 on:
   push:
     branches:
-      - TestBranch 
-      
-
-
-env:
-  AWS_REGION: us-east-1                   
-  ECR_REPOSITORY: big_project_repo           
-  ECS_SERVICE: AnimeList_task_definition                
-  ECS_CLUSTER: webscraper                 
-  ECS_TASK_DEFINITION: BSoup                                   
-  CONTAINER_NAME: b_soup      
+      - TestBranch     
 
 
 jobs:

@@ -7,7 +7,9 @@ name: Deploy to Amazon ECS
 on:
   push:
     branches:
-      - TestBranch
+      - TestBranch 
+      
+
 
 env:
   AWS_REGION: us-east-1                   
@@ -15,17 +17,22 @@ env:
   ECS_SERVICE: AnimeList_task_definition                
   ECS_CLUSTER: webscraper                 
   ECS_TASK_DEFINITION: BSoup                                   
-  CONTAINER_NAME: b_soup           
+  CONTAINER_NAME: b_soup      
+
 
 jobs:
   Build:
     name: Build and Package Artifact
     runs-on: ubuntu-20.04
     container: "python:3.9.0"
+    environment: production
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2 #copies code from the repo into this hosted run
+      uses: actions/checkout@v2 #copies code from the repo into this hosted run 
+      
+    - name: pull dockerfile 
+      uses: Docker/DockerConf.dockerfile@v1
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -41,10 +48,11 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
+        IMAGE: Dockerfile 
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: latest  ## Modified the image tag to fit what the ECS Service is aready pointing to
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker build . --file Dockerfile --tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 

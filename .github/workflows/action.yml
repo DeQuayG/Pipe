@@ -38,9 +38,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
         aws-region: us-east-1
 
-    - name: Login to Amazon ECR
-      id: login-ecr
+    - name: Amazon ECR "Login" Action for GitHub Actions
+  # You may pin to the exact commit or the version.
+  # uses: aws-actions/amazon-ecr-login@aaf69d68aa3fb14c1d5a6be9ac61fe15b48453a2
       uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registries: big_project_repo
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image

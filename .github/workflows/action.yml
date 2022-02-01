@@ -29,7 +29,7 @@ jobs:
       uses: actions/checkout@v2 #copies code from the repo into this hosted run 
       
     - name: pull dockerfile 
-      uses: Pipe/DockerConf.dockerfile@v1
+      uses: DeQuayG/Pipe@v1
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -45,11 +45,11 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-        IMAGE: Dockerfile 
+        dockerfile: DeQuayG/Pipe/tree/main/Docker 
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: latest  ## Modified the image tag to fit what the ECS Service is aready pointing to
       run: |
-        docker build . --file Dockerfile --tag ${{ secrets.ECR_REPO }} .
+        docker build . --file DockerConf.dockerfile --tag ${{ secrets.ECR_REPO }} .
         docker push ${{ secrets.ECR_REPO }}
         echo "::set-output name=image::${{ secrets.ECR_REPO }}"
 

@@ -28,8 +28,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2 #copies code from the repo into this hosted run 
       
-    - name: pull dockerfile 
-      uses: DeQuayG/Pipe@v1
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1

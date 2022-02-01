@@ -5,6 +5,7 @@
 
 FROM python:3.9.0 
 RUN pip install boto3
+RUN apk update && apk add --no-cache docker-cli
 
 #ENV PYTHON_APP=WebScraperClass.py
 

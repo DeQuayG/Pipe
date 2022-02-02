@@ -35,8 +35,8 @@ USER appuser
 WORKDIR /app/
 COPY Docker/requirements.txt /app/
 
-#RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
-COPY /WebScraperClass.py /app/
+COPY Docker/WebScraperClass.py /app/
 
 CMD ["python3", "WebScraperClass.py"] 

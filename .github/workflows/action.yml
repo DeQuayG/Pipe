@@ -32,7 +32,20 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2 #copies code from the repo into this hosted run 
   
-
+    - name: Install Docker
+      run: |
+          apt-get update && apt-get install -y
+          apt-get install sudo
+          apt-get -qq -y install curl
+          sudo apt-get update 
+          sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
+          sudo apt-get update -y 
+          sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          sudo add-apt-repository \
+              "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+              $(lsb_release -cs) \
+              stable" 
+          sudo apt-get install docker-ce docker-ce-cli -y
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -48,6 +61,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         IMAGE_TAG: latest  ## Modified the image tag to fit what the ECS Service is aready pointing to
       run: |
+        docker run -v /var/run/docker.sock:/var/run/docker.sock ...
         docker build . --file DockerConf.dockerfile --tag ${{ secrets.ECR_REPO }} .
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/big_project_repo:latest
         echo "::set-output name=image::${{ secrets.ECR_REPO }}"

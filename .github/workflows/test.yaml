@@ -1,6 +1,10 @@
 name: Build and Push Python Image to AWS ECR
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main 
+    paths: 
+      - '*.Dockerfile'
   
 jobs:
   build-and-push:

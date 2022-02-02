@@ -3,6 +3,7 @@
 #The image is a template for running containers
 # The container is the actual running process holding your packaged code 
 
+
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y
 RUN apt-get -qq -y install curl
@@ -21,6 +22,7 @@ EXPOSE 80 443
 
 RUN apt-get install python3 
 RUN apt-get install pip -y
+
 
 #ENV PYTHON_APP=WebScraperClass.py
 

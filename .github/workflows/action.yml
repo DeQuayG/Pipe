@@ -31,6 +31,17 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
+    - name: Setup AWS SAM CLI
+  # You may pin to the exact commit or the version.
+  # uses: aws-actions/setup-sam@0578b2f57e540e67233c3ce0c5477ee36938ff3d
+      uses: aws-actions/setup-sam@v1
+      with:
+        # The AWS SAM CLI version to install
+        version: latest
+        # The Python interpreter to use for AWS SAM CLI
+        python: 3.9.0
+
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -53,7 +64,7 @@ jobs:
         IMAGE_TAG: latest  ## Modified the image tag to fit what the ECS Service is aready pointing to
       run: |
         docker build . --file DockerConf.dockerfile --tag ${{ secrets.ECR_REPO }} .
-        docker push ${{ secrets.ECR_REPO }}
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/big_project_repo:latest
         echo "::set-output name=image::${{ secrets.ECR_REPO }}"
 
     - name: Fill in the new image ID in the Amazon ECS task definition

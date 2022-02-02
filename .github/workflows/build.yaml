@@ -1,0 +1,60 @@
+name: Deploy to Amazon ECS
+
+on:
+  workflow_dispatch:
+     
+
+env:
+  AWS_REGION: us-east-1                   
+  ECR_REPOSITORY: ${{ secrets.ECR_REPO }}           
+  ECS_SERVICE: AnimeList_task_definition                
+  ECS_CLUSTER: webscraper                 
+  ECS_TASK_DEFINITION: BSoup                                   
+  CONTAINER_NAME: b_soup
+
+
+
+
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    needs: [build]
+    container:
+      image: orgname/buildcontainer
+      # this is the key.
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      # required if our registry is private.
+      
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+        aws-region: us-east-1  
+      
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+       - name: Amazon ECR "Login" Action for GitHub Actions
+  # You may pin to the exact commit or the version.
+  # uses: aws-actions/amazon-ecr-login@aaf69d68aa3fb14c1d5a6be9ac61fe15b48453a2
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registries: ${{ secrets.ECR_REPO }}
+
+      - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        dockerfile: DeQuayG/Pipe/tree/main/Docker 
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: latest  ## Modified the image tag to fit what the ECS Service is aready pointing to
+      run: |
+        docker build . --file DockerConf.dockerfile --tag ${{ secrets.ECR_REPO }} .
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/big_project_repo:latest
+        echo "::set-output name=image::${{ secrets.ECR_REPO }}"
+
+     

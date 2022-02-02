@@ -19,7 +19,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-bionic-18.04
     container:
       image: python:3.9.0
       # this is the key.
@@ -44,7 +44,7 @@ jobs:
           sudo add-apt-repository \
               "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
               $(lsb_release -cs) \
-              stable" 
+              stable nightly" 
           sudo apt-get install docker-ce docker-ce-cli -y
 
     - name: Configure AWS credentials

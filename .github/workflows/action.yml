@@ -1,13 +1,13 @@
 # This workflow will build and push a new container image to Amazon ECR,
 # and then will deploy a new task definition to Amazon ECS, when there is a push to the main branch.
-
+<<<<<<
 
 name: Deploy to Amazon ECS
 
 on:
   push:
-    branches:
-      - TestBranch     
+    branches: Main
+     
 
 env:
   AWS_REGION: us-east-1                   
@@ -16,6 +16,7 @@ env:
   ECS_CLUSTER: webscraper                 
   ECS_TASK_DEFINITION: BSoup                                   
   CONTAINER_NAME: b_soup
+
 
 jobs:
   Build:

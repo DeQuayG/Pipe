@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y
 
 EXPOSE 80 443 
 
-RUN apt-get install python3 
+RUN apt-get install python3 -y
 RUN apt-get install pip -y
 
 

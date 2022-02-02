@@ -5,7 +5,7 @@
 
 
 FROM ubuntu:latest
-RUN apt-get update && apt-get install -y
+#RUN apt-get update && apt-get install -y
 #RUN apt-get -qq -y install curl
 #RUN apt-get install sudo
 #RUN apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
@@ -26,7 +26,7 @@ RUN apt-get install pip -y
 
 #ENV PYTHON_APP=WebScraperClass.py
 
-
+WORKDIR /app/
 
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app/
 USER appuser

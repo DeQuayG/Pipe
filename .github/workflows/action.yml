@@ -46,7 +46,7 @@ jobs:
   # uses: aws-actions/amazon-ecr-login@aaf69d68aa3fb14c1d5a6be9ac61fe15b48453a2
       uses: aws-actions/amazon-ecr-login@v1
       with:
-        registries: ${{ secrets.ECR_REPO }}
+        registries: ${{ secrets.REGISTRY_ID }}
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image

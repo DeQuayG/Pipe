@@ -5,8 +5,7 @@
 name: Deploy to Amazon ECS
 
 on:
-  push:
-    branches: Main
+  workflow_dispatch:
      
 
 env:

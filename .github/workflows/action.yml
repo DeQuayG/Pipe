@@ -64,7 +64,7 @@ jobs:
         IMAGE_TAG: latest  ## Modified the image tag to fit what the ECS Service is aready pointing to
       run: |
         docker run -v /var/run/docker.sock:/var/run/docker.sock ...
-        docker build . --file DockerConf.dockerfile --tag ${{ secrets.ECR_REPO }} .
+        docker build --file DockerConf.dockerfile --tag ${{ secrets.ECR_REPO }} .
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/big_project_repo:latest
         echo "::set-output name=image::${{ secrets.ECR_REPO }}"
   

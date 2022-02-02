@@ -6,8 +6,8 @@
 
 FROM ubuntu:latest
 RUN apt-get update && apt-get install -y
-RUN apt-get -qq -y install curl
-RUN apt-get install sudo
+#RUN apt-get -qq -y install curl
+#RUN apt-get install sudo
 #RUN apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
 #RUN apt-get update -y
 #RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -

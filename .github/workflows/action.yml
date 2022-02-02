@@ -31,26 +31,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2 #copies code from the repo into this hosted run 
-      
-    - name: Install Docker
-      run: |
-          apt-get update && apt-get install -y
-          apt-get install sudo
-          apt-get -qq -y install curl
-          sudo apt-get update 
-          sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
-          sudo apt-get update -y 
-          sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository \
-              "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-              $(lsb_release -cs) \
-              stable" 
-          sudo apt-get install docker-ce docker-ce-cli containerd.io -y
-      
-      
-      
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+  
+
 
     - name: Setup AWS SAM CLI
   # You may pin to the exact commit or the version.

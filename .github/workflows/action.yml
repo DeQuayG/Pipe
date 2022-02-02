@@ -41,13 +41,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
         aws-region: us-east-1
 
-    - name: Amazon ECR "Login" Action for GitHub Actions
-  # You may pin to the exact commit or the version.
-  # uses: aws-actions/amazon-ecr-login@aaf69d68aa3fb14c1d5a6be9ac61fe15b48453a2
-      uses: aws-actions/amazon-ecr-login@v1
-      with:
-        registries: ${{ secrets.REGISTRY_ID }}
-
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
@@ -58,6 +51,18 @@ jobs:
         docker build . --file DockerConf.dockerfile --tag ${{ secrets.ECR_REPO }} .
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/big_project_repo:latest
         echo "::set-output name=image::${{ secrets.ECR_REPO }}"
+  
+  
+  
+  
+  
+    - name: Amazon ECR "Login" Action for GitHub Actions
+  # You may pin to the exact commit or the version.
+  # uses: aws-actions/amazon-ecr-login@aaf69d68aa3fb14c1d5a6be9ac61fe15b48453a2
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registries: ${{ secrets.REGISTRY_ID }}
+
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def

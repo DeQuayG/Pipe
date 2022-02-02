@@ -29,5 +29,5 @@ jobs:
         ECR_REPOSITORY: big_project_repo
         IMAGE_TAG: latest
       run: |
-        docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker build . --file ECS.DockerFile --tag ${{ secrets.ECR_REPO }} .
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/big_project_repo:latest

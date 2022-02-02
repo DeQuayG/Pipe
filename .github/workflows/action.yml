@@ -18,11 +18,15 @@ env:
 
 
 jobs:
-  Build:
-    name: Build and Package Artifact
+  build:
     runs-on: ubuntu-20.04
-    container: "python:3.9.0"
-    environment: env
+    container:
+      image: python:3.9.0
+      # this is the key.
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      # required if our registry is private.
+
 
     steps:
     - name: Checkout

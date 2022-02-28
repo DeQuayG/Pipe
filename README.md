@@ -9,6 +9,7 @@ Within this repo I have my Terraform code which provisions infrastructure on AWS
  - An Elastic Load Balancer 
  - An ECS Cluster, Service, and Tasks 
  - IAM Roles and Policies, including CloudWatch log permissions 
+ - 2 S3 Buckets, one to store WebScraped data, another to store Terraform state
  
  The Repo also contains a Dockerfile to create a Docker Image. This is how I containerized a WebScraper application to upload to ECR and pulled to ECS. 
  That same docker file is also used with a CI/CD pipeline implemented using GitHub actions. Both the Python code and GitHub Actions configuration yaml file 

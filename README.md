@@ -17,3 +17,6 @@ Within this repo I have my Terraform code which provisions infrastructure on AWS
  
  *Please note that the Terraform code will work with a simple copy-paste, but you'll have to input your own AWS Account ID within the ECR section of the code, 
  my apologies, I will update it with a variable substitution later to make it modular, if you get an error,m that is why
+
+
+This is the accompanying blog post for this project: https://medium.com/@dmglascoe/deploying-a-containerized-web-scraper-with-a-ci-cd-pipeline-to-aws-using-terraform-boto3-and-5aaeefadf8e6

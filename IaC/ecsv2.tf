@@ -90,7 +90,7 @@ resource "aws_ecs_task_definition" "MyAnimeList_task_definition" {
 container_definitions = <<DEFINITION
   [
     {
-      "image": "ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/big_project_repo:latest",
+      "image": var.image,
       "name": "b_soup",
       "networkMode": "awsvpc", 
       "portMappings": [
